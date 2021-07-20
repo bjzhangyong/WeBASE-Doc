@@ -589,7 +589,7 @@ Re-enter new password: <– 再输入一次你设置的密码
 Remove anonymous users? [Y/n] <– 是否删除匿名用户，回车
 Disallow root login remotely? [Y/n] <–是否禁止root远程登录，回车
 Remove test database and access to it? [Y/n] <– 是否删除test数据库，回车
-Reload privilege tables now? [Y/n] <– 是否重新加载权限表，回车
+Reload privilege tables now? [Y/n] <– 是否重新加载权限表，按Y回车，使以上修改生效。
 ```
 
 #### ② 授权访问和添加用户
@@ -603,14 +603,16 @@ mysql -uroot -p -h localhost -P 3306
 - 授权root用户远程访问
 
 ```sql
-mysql > GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456' WITH GRANT OPTION;
+mysql > create user 'root'@'%' IDENTIFIED BY '123456';
+mysql > GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
 mysql > flush PRIVILEGES;
 ```
 
 - 创建test用户并授权本地访问
 
 ```sql
-mysql > GRANT ALL PRIVILEGES ON *.* TO 'test'@localhost IDENTIFIED BY '123456' WITH GRANT OPTION;
+mysql > create user 'test'@'%' IDENTIFIED BY '123456';
+mysql > GRANT ALL PRIVILEGES ON *.* TO 'test'@'%';
 mysql > flush PRIVILEGES;
 ```
 
